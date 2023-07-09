@@ -8,7 +8,6 @@
 import { computed, ref } from 'vue'
 import { NModal, NTabPane, NTabs } from 'naive-ui'
 import General from './General.vue'
-import About from './About.vue'
 import { SvgIcon } from '@/components/index'
 
 interface Props {
@@ -46,7 +45,7 @@ const show = computed({
           </template>
           <General />
         </NTabPane>
-        <NTabPane name="General" tab="General">
+        <!-- <NTabPane name="General" tab="General">
           <template #tab>
             <SvgIcon class="text-lg" icon="ri:file-user-line" />
             <span class="ml-2">{{ $t('setting.general') }}</span>
@@ -54,7 +53,7 @@ const show = computed({
           <div class="min-h-[100px]">
             <About />
           </div>
-        </NTabPane>
+        </NTabPane> -->
       </NTabs>
     </div>
   </NModal>
