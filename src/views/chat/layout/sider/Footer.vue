@@ -25,6 +25,12 @@ const show = ref(false)
         <SvgIcon icon="ri:settings-4-line" />
       </span>
     </HoverButton>
+    <!--  @click="handleImageSubmit" -->
+    <!-- <HoverButton>
+      <span class="text-xl text-[#4f555e] dark:text-white">
+        <SvgIcon icon="fluent:draw-image-24-regular" />
+      </span>
+    </HoverButton> -->
 
     <Setting v-if="show" v-model:visible="show" />
   </footer>

@@ -18,6 +18,7 @@ import { useBasicLayout } from '@/hooks/useBasicLayout'
 interface Props {
   dateTime?: string
   text?: string
+  imageUrl?: string
   inversion?: boolean
   error?: boolean
   loading?: boolean
@@ -27,7 +28,6 @@ interface Emit {
   (ev: 'regenerate'): void
   (ev: 'delete'): void
 }
-
 const props = defineProps<Props>()
 
 const emit = defineEmits<Emit>()
@@ -111,6 +111,7 @@ function handleRegenerate() {
           :inversion="inversion"
           :error="error"
           :text="text"
+          :imageurl="imageUrl"
           :loading="loading"
           :as-raw-text="asRawText"
         />

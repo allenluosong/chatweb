@@ -19,9 +19,12 @@ interface Props {
   text?: string
   loading?: boolean
   asRawText?: boolean
+  imageUrl?: string
 }
 
 const props = defineProps<Props>()
+
+// eslint-disable-next-line no-console
 
 const { isMobile } = useBasicLayout()
 
@@ -75,6 +78,9 @@ defineExpose({ textRef })
       <div v-if="!inversion" class="flex items-end">
         <div v-if="!asRawText" class="w-full markdown-body" v-html="text" />
         <div v-else class="w-full whitespace-pre-wrap" v-text="text" />
+        <div v-if="imageUrl" class="w-full">
+          <img :src="imageUrl" alt="Image">
+        </div>
         <span v-if="loading" class="dark:text-white w-[4px] h-[20px] block animate-blink" />
       </div>
       <div v-else class="whitespace-pre-wrap" v-text="text" />

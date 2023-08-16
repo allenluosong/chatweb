@@ -30,9 +30,42 @@ export function fetchChatAPIProcess<T = any>(
     prompt: params.prompt,
     options: params.options,
   }
-
   return post<T>({
     url: '/chat_message/send',
+    data,
+    signal: params.signal,
+    onDownloadProgress: params.onDownloadProgress,
+  })
+}
+
+export function fetchimageAPI<T = any>(
+  prompt: string,
+  // options?: { 'n': 1; 'size': '512x512' },
+  options?: { conversationId?: string; parentMessageId?: string },
+  signal?: GenericAbortSignal,
+) {
+  return post<T>({
+    url: '/images/generations',
+    data: { prompt, options },
+    signal,
+  })
+}
+
+export function fetchImageAPIProcess<T = any>(
+  params: {
+    prompt: string
+    // options?: { 'n': 1; 'size': '512x512' }
+    options?: { conversationId?: string; parentMessageId?: string }
+    signal?: GenericAbortSignal
+    onDownloadProgress?: (progressEvent: AxiosProgressEvent) => void },
+) {
+  const data: Record<string, any> = {
+    prompt: params.prompt,
+    options: params.options,
+  }
+
+  return post<T>({
+    url: '/images/generations',
     data,
     signal: params.signal,
     onDownloadProgress: params.onDownloadProgress,

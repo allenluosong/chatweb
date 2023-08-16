@@ -20,6 +20,7 @@ export interface HttpOption {
 }
 
 export interface Response<T = any> {
+  response: any
   data: T
   message: string | null
   status: string
