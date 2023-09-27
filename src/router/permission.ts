@@ -15,9 +15,9 @@ export function setupPageGuard(router: Router) {
         next({ name: 'Root' })
       else
         next()
-    }
+      }
     else {
-      next()
+      next() 
     }
   })
 }

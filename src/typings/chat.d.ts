@@ -51,6 +51,7 @@ declare namespace Chat {
 	}
 
 	interface AiImageItem {
+    code: number
 		id?: number
 		uuid: string
 		prompt?: string

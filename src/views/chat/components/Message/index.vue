@@ -1,26 +1,29 @@
 <!--
  * @Author: mjjh
  * @LastEditTime: 2023-04-09 14:21:25
- * @FilePath: \chatgpt-shuowen\src\views\chat\components\Message\index.vue
+ * @FilePath: \src\views\chat\components\Message\index.vue
  * @Description: 移动端消息组件
--->
-<script setup lang='ts'>
+--><script setup lang='ts'>
 import { computed, ref } from 'vue'
-import { NDropdown } from 'naive-ui'
+import { NDropdown, NEmpty, NImage, NImageGroup, NSpace, NSpin } from 'naive-ui'
 import AvatarComponent from './Avatar.vue'
 import TextComponent from './Text.vue'
-import { SvgIcon } from '@/components/index'
+import { SvgIcon } from '@/components'
 import { copyText } from '@/utils/format'
 import { useIconRender } from '@/hooks/useIconRender'
 import { t } from '@/locales'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
+import NoPic from '@/assets/no_pic.png'
 
 interface Props {
   dateTime?: string
   text?: string
+  imageUrls?: string[]
   inversion?: boolean
+  showAvatar?: boolean
   error?: boolean
   loading?: boolean
+  type: string // text,text-image,image
 }
 
 interface Emit {
@@ -28,7 +31,9 @@ interface Emit {
   (ev: 'delete'): void
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  showAvatar: true,
+})
 
 const emit = defineEmits<Emit>()
 
@@ -87,12 +92,9 @@ function handleRegenerate() {
 </script>
 
 <template>
-  <div
-    ref="messageRef"
-    class="flex w-full mb-6 overflow-hidden"
-    :class="[{ 'flex-row-reverse': inversion }]"
-  >
+  <div ref="messageRef" class="flex w-full mb-6 overflow-hidden" :class="[{ 'flex-row-reverse': inversion }]">
     <div
+      v-if="showAvatar"
       class="flex items-center justify-center flex-shrink-0 h-8 overflow-hidden rounded-full basis-8"
       :class="[inversion ? 'ml-2' : 'mr-2']"
     >
@@ -102,38 +104,54 @@ function handleRegenerate() {
       <p class="text-xs text-[#b4bbc4]" :class="[inversion ? 'text-right' : 'text-left']">
         {{ dateTime }}
       </p>
-      <div
-        class="flex items-end gap-1 mt-2"
-        :class="[inversion ? 'flex-row-reverse' : 'flex-row']"
-      >
-        <TextComponent
-          ref="textRef"
-          :inversion="inversion"
-          :error="error"
-          :text="text"
-          :loading="loading"
-          :as-raw-text="asRawText"
-        />
-        <div class="flex flex-col">
-          <button
-            v-if="!inversion"
-            class="mb-2 transition text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-300"
-            @click="handleRegenerate"
-          >
-            <SvgIcon icon="ri:restart-line" />
-          </button>
-          <NDropdown
-            :trigger="isMobile ? 'click' : 'hover'"
-            :placement="!inversion ? 'right' : 'left'"
-            :options="options"
-            @select="handleSelect"
-          >
-            <button class="transition text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-200">
-              <SvgIcon icon="ri:more-2-fill" />
+      <div class="flex items-start gap-1 mt-2" :class="[inversion ? 'flex-row-reverse' : 'flex-row']">
+        <!-- render text -->
+        <template v-if="type === 'text' || type === 'text-image'">
+          <TextComponent
+            ref="textRef" :inversion="inversion" :error="error" :text="text" :loading="loading"
+            :as-raw-text="asRawText"
+          />
+          <div class="flex flex-col">
+            <button
+              v-if="!inversion"
+              class="mb-2 transition text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-300"
+              @click="handleRegenerate"
+            >
+              <SvgIcon icon="ri:restart-line" />
             </button>
-          </NDropdown>
-        </div>
+            <NDropdown
+              :trigger="isMobile ? 'click' : 'hover'" :placement="!inversion ? 'right' : 'left'"
+              :options="options" @select="handleSelect"
+            >
+              <button class="transition text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-200">
+                <SvgIcon icon="ri:more-2-fill" />
+              </button>
+            </NDropdown>
+          </div>
+        </template>
       </div>
+      <NSpace class="mt-1" :style="inversion ? 'justify-content:flex-end;' : ''">
+        <!-- render image -->
+        <template v-if="type === 'image' || type === 'text-image'">
+          <template v-if="loading">
+            <NSpin size="medium" />
+          </template>
+          <template v-else>
+            <template v-if="!imageUrls || imageUrls.length === 0">
+              <NEmpty description="找不到图片" />
+            </template>
+            <template v-if="imageUrls && imageUrls.length > 0">
+              <NImageGroup>
+                <NSpace>
+                  <template v-for="imageUrl in imageUrls" :key="imageUrl">
+                    <NImage v-if="imageUrl" width="100" :src="`${imageUrl.url}`" :fallback-src="NoPic" />
+                  </template>
+                </NSpace>
+              </NImageGroup>
+            </template>
+          </template>
+        </template>
+      </NSpace>
     </div>
   </div>
 </template>

@@ -19,21 +19,25 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '/chat/:uuid?',
-        name: 'Chat',
-        component: () => import('@/views/chat/index.vue'),
+        children: [{
+          path: '',
+          name: 'Chat',
+          component: () => import('@/views/chat/index.vue'),
+        }
+        ],
+      },
+      {
+        path: '/draw',
+        name: 'Draw',
+        component: () => import('@/views/draw/index.vue'),
       },
     ],
   },
-
+  
   {
     path: '/emailValidation',
     name: 'emailValidation',
     component: () => import('@/views/exception/emailValidation/index.vue'),
-  },
-  {
-    path: '/draw',
-    name: 'Draw',
-    component: () => import('@/views/draw/index.vue'),
   },
   {
     path: '/404',

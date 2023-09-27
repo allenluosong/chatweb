@@ -519,7 +519,7 @@ onUnmounted(() => {
                 v-for="(item, index) of dataSources"
                 :key="index"
                 :date-time="item.dateTime"
-                :text="item.text"
+                :text="item.text" type="text"
                 :inversion="item.inversion"
                 :error="item.error"
                 :loading="item.loading"

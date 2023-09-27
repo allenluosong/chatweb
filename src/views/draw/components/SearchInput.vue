@@ -81,9 +81,13 @@ const buttonDisabled = computed(() => {
 watch(
   prompt,
   (val) => {
+    // eslint-disable-next-line no-console
     console.log('searchOptionssearchOptions')
-    if (val.indexOf('/') === 0 && val.length > 1)
+    if (val.indexOf('/') === 0 && val.length > 1) {
+      // eslint-disable-next-line no-console
+      console.log('searchOptionssearchOptions123')
       handleSearchRemote()
+    }
   },
 )
 </script>

@@ -20,6 +20,7 @@ export interface HttpOption {
 }
 
 export interface Response<T = any> {
+  response: any
   data: T
   message: string | null
   status: string
@@ -32,7 +33,6 @@ function http<T = any>(
   const successHandler = (res: AxiosResponse<Response<T>>) => {
     if (res.data.code === 200 || typeof res.data === 'string')
       return res.data
-
     return Promise.reject(res.data)
   }
 

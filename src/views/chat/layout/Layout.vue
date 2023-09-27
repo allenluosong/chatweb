@@ -52,7 +52,7 @@ if (!needPermission.value)
   <div class="h-full dark:bg-[#24272e] transition-all" :class="[isMobile ? 'p-0' : 'p-4']">
     <div class="h-full overflow-hidden" :class="getMobileClass">
       <NLayout class="z-40 transition" :class="getContainerClass" has-sider>
-        <Sider />
+        <Sider v-if="$route.path.includes('chat') " />
         <NLayoutContent class="h-full">
           <RouterView v-slot="{ Component, route }">
             <component :is="Component" :key="route.fullPath" />
