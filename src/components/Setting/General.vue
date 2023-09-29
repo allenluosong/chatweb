@@ -16,7 +16,9 @@ import { SvgIcon } from '@/components/index'
 import { useAppStore, useAuthStore, useUserStore } from '@/store'
 import { getCurrentDate } from '@/utils/functions'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const appStore = useAppStore()
 const authStore = useAuthStore()
 const userStore = useUserStore()
@@ -88,11 +90,9 @@ function logout() {
   // 移除token
   authStore.removeToken()
   userStore.resetUserInfo()
-  // 清除聊天记录
-  // localStorage.removeItem('chatStorage')
-  // location.reload()
   // 重载页面
-  window.location.reload()
+  // window.location.reload()
+  router.push({ name: 'Root' })
 }
 </script>
 

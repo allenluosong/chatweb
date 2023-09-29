@@ -28,6 +28,8 @@ function commonSettingChange(imageSize: string, imageNumber: number) {
   generateImageNumber.value = imageNumber
 }
 async function handleSubmit(prompt: string) {
+  if (prompt.length === 0)
+    return 
   // eslint-disable-next-line no-console
   console.log(`GenerateImage submit:${prompt}`)
   try {

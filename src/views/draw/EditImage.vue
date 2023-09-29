@@ -1,3 +1,9 @@
+<!--
+ * @Author: allen
+ * @LastEditTime: 2023-09-16 19:55:29
+ * @FilePath: \chagpt-shuowen\src\views\draw\EditImage.vue
+ * @Description: 
+-->
 <script setup lang='ts'>
 import { ref } from 'vue'
 import { NCard, NCol, NCollapseTransition, NIcon, NImage, NRow, NSpace, NSwitch, NTooltip, NUpload, useMessage } from 'naive-ui'

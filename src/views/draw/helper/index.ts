@@ -16,7 +16,12 @@ export async function checkProcess(uuid: string) {
   }
   beginLoading = new Date()
   const imageResp = await api.fetchAiImage<Chat.AiImageItem>(uuid)
-  drawStore.updateAiImage(uuid, imageResp.data)
-  drawStore.setLoading(false)
-  drawStore.setLoadingUuid('')
+  // drawStore.updateAiImage(uuid, imageResp.data)
+  // drawStore.setLoading(false)
+  // drawStore.setLoadingUuid('')
+  if (imageResp.code === 200) {
+    drawStore.updateAiImage(uuid, imageResp.data)
+    drawStore.setLoading(false)
+    drawStore.setLoadingUuid('')
+  }
 }

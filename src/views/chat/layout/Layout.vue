@@ -7,7 +7,7 @@
 <script setup lang='ts'>
 import { computed } from 'vue'
 import { NLayout, NLayoutContent, NModal, NTabPane, NTabs } from 'naive-ui'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import Sider from './sider/index.vue'
 import login from './login.vue'
 import register from './register.vue'
@@ -16,12 +16,24 @@ import { useAppStore, useAuthStore, useChatStore, useUserStore } from '@/store'
 import Icon403 from '@/icons/403.vue'
 
 const router = useRouter()
+const route = useRoute()
 const appStore = useAppStore()
 const chatStore = useChatStore()
 const authStore = useAuthStore()
 const userStore = useUserStore()
 
-router.replace({ name: 'Chat', params: { uuid: chatStore.active } })
+
+const { uuid: curConvUuid } = route.params as { uuid: string }
+console.log(`curConvUuid:${curConvUuid}`)
+if (!curConvUuid) {
+  console.log(`uuid,chatStore.active:${chatStore.active}`)
+  router.replace({ name: 'Chat', params: { uuid: chatStore.active } })
+} else if (curConvUuid !== chatStore.active) {
+  console.log(`curConvUuid !== chatStore.active:${chatStore.active}`)
+  chatStore.setActive(curConvUuid)
+}
+
+// router.replace({ name: 'Chat', params: { uuid: chatStore.active } })
 
 const { isMobile } = useBasicLayout()
 
@@ -36,10 +48,12 @@ const getMobileClass = computed(() => {
   return ['border', 'rounded-md', 'shadow-md', 'dark:border-neutral-800']
 })
 
+
 const getContainerClass = computed(() => {
   return [
     'h-full',
-    { 'pl-[260px]': !isMobile.value && !collapsed.value },
+    { 'pl-[260px]': !isMobile.value && !collapsed.value && route.path.includes('chat') },
+    { 'pl-[0px]': !isMobile.value && !collapsed.value && route.path.includes('draw') }
   ]
 })
 

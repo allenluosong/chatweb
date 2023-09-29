@@ -10,6 +10,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import { setupPageGuard } from './permission'
 import { ChatLayout } from '@/views/chat/layout'
 
+// DrawLayout
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -19,15 +20,17 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '/chat/:uuid?',
-        children: [{
-          path: '',
-          name: 'Chat',
-          component: () => import('@/views/chat/index.vue'),
-        }
-        ],
+        name: 'Chat',
+        component: () => import('@/views/chat/index.vue'),
       },
+    ],
+  },
+  {
+    path: '/draw',
+    component: ChatLayout,
+    children: [
       {
-        path: '/draw',
+        path: '',
         name: 'Draw',
         component: () => import('@/views/draw/index.vue'),
       },

@@ -1,3 +1,10 @@
+<!--
+ * @Author: allen
+ * @LastEditTime: 2023-09-16 19:55:29
+ * @FilePath: \chagpt-shuowen\src\views\draw\index.vue
+ * @Description: 绘画页面index.vue
+-->
+
 <script setup lang='ts'>
 import { computed, nextTick, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
