@@ -84,6 +84,59 @@ function imageVariation<T = any>(originalImage: string, size: string, number: nu
   })
 }
 
+function modifyPassword<T>(password: string) {
+  return post<T>({
+    url: '/user/password/modify',
+    data: { password },
+  })
+}
+
+/**
+ * 前端密码重置
+ */
+export interface resetPasswordEmailCodeModel {
+    // 邮箱地址
+    to_email_address: string
+}
+/**
+ * @description: 密码重置
+ * @param {resetPasswordEmailCodeModel} data
+ * @return {*}
+ */
+export function resetPasswordEmailCode<T>(data: resetPasswordEmailCodeModel): any {
+  return post<T>({
+    url: '/user/password/reset/verify_email_code',
+    data,
+  })
+}
+
+/**
+ * 前端密码重置
+ */
+export interface resetPasswordModel {
+  // 邮箱地址
+  to_email_address: string  
+  // 新的密码
+  newPassword: string
+  //  图形验证码会话ID，必传
+  picCodeSessionId: string
+  // 图片验证码，必传
+  picVerificationCode: string
+  // 发送到邮件的验证码
+  emailVerficationCode: string
+}
+/**
+* @description: 密码重置
+* @param {resetPasswordModel} data
+* @return {*}
+*/
+export function resetPassword<T>(data: resetPasswordModel): any {
+return post<T>({
+  url: '/user/password/reset',
+  data,
+})
+}
+
 export default {
   fileDel,
   fetchAiImage,
@@ -92,4 +145,5 @@ export default {
   imageEdit,
   imageVariation,
   imageDel,
+  modifyPassword,
 }

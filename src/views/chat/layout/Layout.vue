@@ -11,6 +11,7 @@ import { useRoute, useRouter } from 'vue-router'
 import Sider from './sider/index.vue'
 import login from './login.vue'
 import register from './register.vue'
+import register2 from './ResetPassword.vue'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { useAppStore, useAuthStore, useChatStore, useUserStore } from '@/store'
 import Icon403 from '@/icons/403.vue'
@@ -92,6 +93,9 @@ if (!needPermission.value)
             </NTabPane>
             <NTabPane name="register" tab="注册">
               <register />
+            </NTabPane>
+            <NTabPane name="resetPassword" tab="密码重置">
+              <register2 />
             </NTabPane>
           </NTabs>
         </div>

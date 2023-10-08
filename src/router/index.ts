@@ -23,19 +23,24 @@ const routes: RouteRecordRaw[] = [
         name: 'Chat',
         component: () => import('@/views/chat/index.vue'),
       },
-    ],
-  },
-  {
-    path: '/draw',
-    component: ChatLayout,
-    children: [
       {
-        path: '',
+        path: '/draw',
         name: 'Draw',
         component: () => import('@/views/draw/index.vue'),
       },
     ],
   },
+  // {
+  //   path: '/draw',
+  //   component: ChatLayout,
+  //   children: [
+  //     {
+  //       path: '/',
+  //       name: 'Draw',
+  //       component: () => import('@/views/draw/index.vue'),
+  //     },
+  //   ],
+  // },
   
   {
     path: '/emailValidation',

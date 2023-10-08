@@ -149,11 +149,11 @@ function handleClick(tabOjb: TabObj) {
   lastClickTab = tabOjb.name
 }
 
-onMounted(() => {
-  // eslint-disable-next-line no-console
-  console.log('draw onActivated')
-  handleLoadMoreImages()
-})
+// onMounted(() => {
+//   // eslint-disable-next-line no-console
+//   console.log('draw onActivated')
+//   handleLoadMoreImages()
+// })
 </script>
 
 <template>

@@ -34,6 +34,8 @@ export default {
     unauthorizedTips: '未经授权，请先验证。',
     email: '邮箱',
     passWord: '密码',
+    newPassword: '新的密码',
+    emailVerficationCode: '邮箱验证码',
     captcha: '验证码',
     addEmailTips1: '请输入邮箱',
     addEmailTips2: '请输出正确邮箱格式',
@@ -43,7 +45,7 @@ export default {
   chat: {
     defaultName: 'Chat',
     newChatButton: '新建聊天',
-    placeholder: '来说点什么吧...（Shift + Enter = 换行，"/" 触发提示词）',
+    placeholder: '来说点什么吧...(Shift + Enter = 换行，"/" 触发提示词)',
     placeholderMobile: '来说点什么...',
     copy: '复制',
     copied: '复制成功',
