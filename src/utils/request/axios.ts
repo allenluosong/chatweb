@@ -9,6 +9,7 @@ import { useAuthStore } from '@/store'
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_GLOB_API_URL,
+	timeout: 600000,
 })
 
 service.interceptors.request.use(
